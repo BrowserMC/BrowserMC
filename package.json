@@ -1,0 +1,28 @@
+{
+  "name": "browsermc",
+  "version": "1.0.0",
+  "description": "A Minecraft Client on Browser",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrowserMC/BrowserMC.git"
+  },
+  "keywords": [
+    "Minecraft"
+  ],
+  "author": "CmdBlock-zqg",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/BrowserMC/BrowserMC/issues"
+  },
+  "homepage": "https://github.com/BrowserMC/BrowserMC#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mineflayer": "^3.0.0",
+    "nodejs-websocket": "^1.7.2",
+    "serve-static": "^1.14.1"
+  }
+}
