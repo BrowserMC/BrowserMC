@@ -3,9 +3,9 @@ import loadMcData from './data.js'
 
 (async () => {
   let data = await loadMcData()
-  let model = data.getBlockModel(9)
-  console.log(model)
-  console.log(data.getBlockModel(2058))
+  let model = data.getBlockModel(11194) // 5185 // 14
+  // console.log(model)
+  // console.log(data.getBlockModel(2058))
   scene.renderBlock(model)
 })()
 

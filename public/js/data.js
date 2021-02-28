@@ -40,8 +40,13 @@ export default async () => {
     return properties
   }
 
+  let blockModelCache = {}
+
   // 用StateId获取方块模型
   const getBlockModel = (stateId) => {
+    if (blockModelCache[stateId]) {
+      return blockModelCache[stateId]
+    }
     const getBlockModelParts = (stateId) => {
       const randomModel = (models) => {
         if (!Array.isArray(models)) return models
@@ -71,7 +76,7 @@ export default async () => {
       if (models.variants) {
         let statesStr = Object.keys(models.variants)[0]
         if (statesStr === '') {
-          return randomModel(models.variants[''])
+          return [randomModel(models.variants[''])]
         }
         let states = []
         for (let i of statesStr.split(',')) {
@@ -103,7 +108,6 @@ export default async () => {
       }
     }
     const getElement = (model) => {
-      // console.log(model)
       let modelJson = JSON.stringify(model)
       for (let i of Object.keys(model.textures)) {
         modelJson = modelJson.replace(new RegExp(`#${i}`, "gm"), model.textures[i])
@@ -127,7 +131,14 @@ export default async () => {
         if (i === 'parent') {
           continue
         } else if (i === 'textures') {
-          res.textures = model.textures.particle ? { particle: model.textures.particle } : {}
+          if (model.textures.particle) {
+            if (res.textures) {
+              res.textures.particle = model.textures.particle
+            } else {
+              res.textures = { particle: model.textures.particle }
+            }
+            
+          }
         } else {
           res[i] = model[i]
         }
@@ -141,7 +152,7 @@ export default async () => {
       model.model = getElement(blocksModels[modelName])
       models.push(model)
     }
-    return models
+    return blockModelCache[stateId] = models
   }
 
   return {
